@@ -1,6 +1,6 @@
 {
   "name": "jokeman",
-  "version": "1.0",
+  "version": "1.1",
   "description": "Le bot le plus blagueur que vous pourrez rencontrer !",
   "main": "dist/index.js",
   "author": "Nolhan#2508",
