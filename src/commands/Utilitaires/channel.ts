@@ -20,7 +20,7 @@ class Channel extends Command {
         if (!args[0] || !message.mentions.channels.first() && !message?.guild?.channels.cache.get(args[0])) {
             // @ts-ignore
             if (!client.jokeChannels.has(message?.guild?.id) || !message?.guild?.channels.cache.get(client.jokeChannels.get(message?.guild?.id)?.channel)) return message.reply({ content: `**${client.emotes.no} ➜ Aucun salon défini.**` })
-            if (message?.guild?.channels.cache.get(client.jokeChannels.get(message?.guild?.id)?.channel)) return message.reply({ content: `**${client.emotes.no} ➜ Les blagues du jour sont envoyées dans <#${client.jokeChannels.get(message?.guild?.id)?.channel}>.**` })
+            if (message?.guild?.channels.cache.get(client.jokeChannels.get(message?.guild?.id)?.channel)) return message.reply({ content: `**${client.emotes.yes} ➜ Les blagues du jour sont envoyées dans <#${client.jokeChannels.get(message?.guild?.id)?.channel}>.**` })
         }
 
         if (message.mentions.channels.first() || message?.guild?.channels.cache.get(args[0])) {
