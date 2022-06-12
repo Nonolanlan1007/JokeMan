@@ -8,4 +8,4 @@
 > Vous avez besoin d'aide ? Voici comment me contacter : 
 > - Vous pouvez [ouvrir une issue](https://github.com/Nonolanlan1007/JokeMan/issues/new).
 > - Vous pouvez aussi me contacter par Discord (`Nolhan#2508`) ou par mail (nolhan.dev@gmail.com).
-> - En cas de bugs, merci [d'ouvrir une pull request]().
+> - En cas de bugs, merci [d'ouvrir une issue](https://github.com/Nonolanlan1007/JokeMan/issues/new).
