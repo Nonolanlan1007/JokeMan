@@ -28,8 +28,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "start:js": "node dist/index.js",
-    "start:ts": "node src/index.ts",
+    "start:js": "nodemon dist/index.js",
+    "start:ts": "ts-node src/index.ts",
     "prod:start": "pm2 start dist/index.js",
     "prod:restart": "pm2 restart dist/index.js",
     "prod:list": "pm2 list",
