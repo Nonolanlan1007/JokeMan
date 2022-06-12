@@ -14,7 +14,7 @@ export = async (client: Class) => {
   }, 120000);
 
   setInterval(async () => {
-      if (moment(Date.now()).format("hh:mm") !== "14:55") return;
+      if (moment(Date.now()).format("HH:mm") !== "00:00") return;
       console.log(1)
       if (client.jokeChannels.array().length === 0) return;
 
@@ -28,7 +28,7 @@ export = async (client: Class) => {
               content: null,
               embeds: [
                   {
-                      title: `[${blague.id} ➜ ${blague.type.toUpperCase()}] ➜ ${interaction.values[0] === "global" ? "Blague générale" : interaction.values[0] === "dev" ? "Blague de développeur" : interaction.values[0] === "dark" ? "Humour noir" : interaction.values[0] === "blondes" ? "Blague de blonde" : interaction.values[0] === "limit" ? "Blague 18+" : interaction.values[0] === "beauf" ? "Blague de beauf" : "Blague de type incconu"}`,
+                      title: `[${blague.id}] ➜ La bague du jour`,
                       description: `${blague.joke}\n\n> ||${blague.answer}||`,
                       color: client.config.color.integer,
                       footer: {
