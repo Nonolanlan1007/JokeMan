@@ -19,7 +19,7 @@ class Channel extends Command {
     async run(client: Class, message: Message, args: string[]): Promise<Message<boolean>> {
         if (!args[0] || !message.mentions.channels.first() && !message?.guild?.channels.cache.get(args[0])) {
             // @ts-ignore
-            if (!client.jokeChannels.has(message?.guild?.id) || client.jokeChannels.has(message?.guild?.id) && message?.guild?.channels.cache.get(client.jokeChannels.get(message?.guild?.id)?.channel)) return message.reply({ content: `**${client.emotes.no} ➜ Aucun salon défini.**` })
+            if (!client.jokeChannels.has(message?.guild?.id) || !message?.guild?.channels.cache.get(client.jokeChannels.get(message?.guild?.id)?.channel)) return message.reply({ content: `**${client.emotes.no} ➜ Aucun salon défini.**` })
             if (message?.guild?.channels.cache.get(client.jokeChannels.get(message?.guild?.id)?.channel)) return message.reply({ content: `**${client.emotes.no} ➜ Les blagues du jour sont envoyées dans <#${client.jokeChannels.get(message?.guild?.id)?.channel}>.**` })
         }
 
@@ -29,7 +29,7 @@ class Channel extends Command {
                 channel: message.mentions.channels.first()?.id || message?.guild?.channels.cache.get(args[0])?.id
             })
 
-            message.reply({ content: `**${client.emotes.no} ➜ Les blagues du jour seront maintenant envoyées dans <#${message.mentions.channels.first()?.id || message?.guild?.channels.cache.get(args[0])?.id}>.**` })
+            message.reply({ content: `**${client.emotes.yes} ➜ Les blagues du jour seront maintenant envoyées dans <#${message.mentions.channels.first()?.id || message?.guild?.channels.cache.get(args[0])?.id}>.**` })
         }
     }
 }
