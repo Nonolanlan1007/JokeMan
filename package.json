@@ -13,6 +13,7 @@
     "enmap": "^5.9.0",
     "figlet": "^1.5.2",
     "fs": "^0.0.1-security",
+    "moment": "^2.29.3",
     "path": "^0.12.7",
     "pretty-ms": "^7.0.1"
   },
@@ -27,8 +28,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "start:js": "node dist/index.js",
-    "start:ts": "node src/index.ts",
+    "start:js": "nodemon dist/index.js",
+    "start:ts": "ts-node src/index.ts",
     "prod:start": "pm2 start dist/index.js",
     "prod:restart": "pm2 restart dist/index.js",
     "prod:list": "pm2 list",
