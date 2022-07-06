@@ -10,10 +10,8 @@ import {
 import Class from "../..";
 import Command from "../../utils/Command";
 import getJoke from "../../functions/getJoke";
-import { CategoriesRefsFull } from "../../types/Category";
+import { CategoriesRefsFull, JokeEmojis } from "../../types/Category";
 import { Category, JokeResponse } from "blagues-api/dist/types/types";
-
-
 
 class Joke extends Command {
     constructor() {
@@ -27,41 +25,17 @@ class Joke extends Command {
         });
     }
 
+    catergories = Object.entries(CategoriesRefsFull).map(([key, name]) => ({
+        label: name,
+        value: key,
+        emoji: JokeEmojis[key as Category]
+    }))
     // @ts-ignore
     async run(client: Class, message: Message, args: string[]): Promise<Message<boolean>> {
         const menu = new MessageSelectMenu()
             .setPlaceholder("Sélectionnez le type de blagues que vous souhaitez")
             .setCustomId("joke")
-            .setOptions({
-                    label: "Blagues générales",
-                    value: client.blagues.categories.GLOBAL,
-                    emoji: "🌐"
-                },
-                {
-                    label: "Blagues de développeurs",
-                    value: client.blagues.categories.DEV,
-                    emoji: "🖥"
-                },
-                {
-                    label: "Humour noir",
-                    value: client.blagues.categories.DARK,
-                    emoji: "😈"
-                },
-                {
-                    label: "Blagues de blondes",
-                    value: client.blagues.categories.BLONDES,
-                    emoji: "👱‍♀️"
-                },
-                {
-                    label: "Blagues 18+",
-                    value: client.blagues.categories.LIMIT,
-                    emoji: "🔞"
-                },
-                {
-                    label: "Blagues de beaufs",
-                    value: client.blagues.categories.BEAUF,
-                    emoji: "🍻"
-                })
+            .setOptions(this.catergories)
 
         const btn = new MessageButton()
             .setStyle("PRIMARY")
@@ -101,7 +75,7 @@ class Joke extends Command {
                         content: null,
                         embeds: [
                             {
-                                title: `[${blague.id} ➜ ${blague.type.toUpperCase()}] ➜ ${CategoriesRefsFull[blague.type.toString() as Category]}`,
+                                title: `[${blague.id} ➜ ${blague.type.toUpperCase()}] ➜ ${CategoriesRefsFull[blague.type as Category]}`,
                                 description: `${blague.joke}\n\n> ||${blague.answer}||`,
                                 color: client.config.color.integer,
                                 footer: {
@@ -124,7 +98,7 @@ class Joke extends Command {
                                             content: null,
                                             embeds: [
                                                 {
-                                                    title: `[${blague.id} ➜ ${blague.type.toUpperCase()}] ➜ ${CategoriesRefsFull[blague.type.toString() as Category]}`,
+                                                    title: `[${blague.id} ➜ ${blague.type.toUpperCase()}] ➜ ${CategoriesRefsFull[blague.type as Category]}`,
                                                     description: `${blague.joke}\n\n> ||${blague.answer}||`,
                                                     color: client.config.color.integer,
                                                     footer: {
