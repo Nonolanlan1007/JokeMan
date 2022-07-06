@@ -1,6 +1,7 @@
-import { Client } from "discord.js";
+import { Category } from "blagues-api/dist/types/types";
+import Class from "..";
 
-export default async function getJoke(client: Client, jokesType: string) {
+export default async function getJoke(client: Class, jokesType: Category) {
 
 
     return new Promise(async(_resolve) => {
