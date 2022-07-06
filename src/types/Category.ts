@@ -15,3 +15,12 @@ export const CategoriesRefsFull: Record<Category, string> = {
     beauf: 'Humour beauf',
     blondes: 'Blagues de blondes'
 };
+
+export const JokeEmojis: Record<Category, string> = {
+    global: '🌐',
+    dev: '🖥',
+    dark: '😈',
+    blondes: '👱‍♀️',
+    limit: '🔞',
+    beauf: '🍻'
+};
