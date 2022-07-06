@@ -11,7 +11,7 @@ class Channel extends Command {
             description: 'Définir le salon d\'envoi de la blague du jour.',
             usage: 'channel [salon]',
             cooldown: 0,
-            perms: ["Administrator"]
+            perms: ["ADMINISTRATOR"]
         });
     }
 
