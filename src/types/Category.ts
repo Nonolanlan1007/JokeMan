@@ -1,5 +1,3 @@
-import { Category } from "blagues-api/dist/types/types";
-
 export interface Joke {
     id: number;
     type: Category;
@@ -7,7 +5,17 @@ export interface Joke {
     answer: string;
 }
 
+export type Category =
+  | 'global'
+  | 'dev'
+  | 'dark'
+  | 'limit'
+  | 'beauf'
+  | 'blondes'
+  | 'random'
+  
 export const CategoriesRefsFull: Record<Category, string> = {
+    random: "Blagues aléatoire",
     global: 'Tout public',
     dark: 'Humour noir',
     dev: 'Blague de dev',
@@ -17,6 +25,7 @@ export const CategoriesRefsFull: Record<Category, string> = {
 };
 
 export const JokeEmojis: Record<Category, string> = {
+    random: "🔀",
     global: '🌐',
     dev: '🖥',
     dark: '😈',
