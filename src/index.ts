@@ -15,7 +15,9 @@ class Class extends Client {
     slashs: Collection<string | undefined, any>;
     jokeChannels: Enmap;
     blagues: BlaguesAPI;
-    config: { token: string; prefix: string;  color: { hexa: string; integer: number; }; owners: string[]; jokeToken: string; botlogs: string; };
+    config: {
+        mongooseConnectionString: string; token: string; prefix: string;  color: { hexa: string; integer: number; }; owners: string[]; jokeToken: string; botlogs: string; 
+};
     emotes: { yes: string; no: string; bof: string; offline: string; online: string; streaming: string; idle: string; dnd: string; boost: string; loading: string; sort: string; entre: string; alerte: string; notif: string; question: string; cadena: string; badges: { verifieddevelopper: string; balance: string; mod: string; bravery: string; bughuntergold: string; bughunter: string; brillance: string; hypesquadevent: string; partner: string; staff: string; earlysupporter: string; verifiedbot: string; system: string; badges: string; }; discordicons: { list: string; bot: string; textchannel: string; wave: string; entre: string; game: string; id: string; hierarchie: string; key: string; man: string; img: string; tag: string; clyde: string; horloge: string; }; };
     
     constructor(token: string) {

@@ -10,6 +10,8 @@ import {
 import Class from "../..";
 import Command from "../../utils/Command";
 import getJoke from "../../functions/getJoke";
+import { CategoriesRefsFull, JokeEmojis } from "../../types/Category";
+import { Category, JokeResponse } from "blagues-api/dist/types/types";
 
 class Joke extends Command {
     constructor() {
@@ -23,41 +25,17 @@ class Joke extends Command {
         });
     }
 
+    catergories = Object.entries(CategoriesRefsFull).map(([key, name]) => ({
+        label: name,
+        value: key,
+        emoji: JokeEmojis[key as Category]
+    }))
     // @ts-ignore
     async run(client: Class, message: Message, args: string[]): Promise<Message<boolean>> {
         const menu = new MessageSelectMenu()
             .setPlaceholder("Sélectionnez le type de blagues que vous souhaitez")
             .setCustomId("joke")
-            .setOptions({
-                    label: "Blagues générales",
-                    value: "global",
-                    emoji: "🌐"
-                },
-                {
-                    label: "Blagues de développeurs",
-                    value: "dev",
-                    emoji: "🖥"
-                },
-                {
-                    label: "Humour noir",
-                    value: "dark",
-                    emoji: "😈"
-                },
-                {
-                    label: "Blagues de blondes",
-                    value: "blondes",
-                    emoji: "👱‍♀️"
-                },
-                {
-                    label: "Blagues 18+",
-                    value: "limit",
-                    emoji: "🔞"
-                },
-                {
-                    label: "Blagues de beaufs",
-                    value: "beauf",
-                    emoji: "🍻"
-                })
+            .setOptions(this.catergories)
 
         const btn = new MessageButton()
             .setStyle("PRIMARY")
@@ -90,14 +68,14 @@ class Joke extends Command {
 
         collector.on("collect", async (interaction: SelectMenuInteraction) => {
             await interaction.deferUpdate()
-            await getJoke(client, interaction.values[0])
+            await getJoke(client, interaction.values[0] as Category)
                 // @ts-ignore
-                .then(async (blague: object) => {
+                .then(async (blague: JokeResponse) => {
                     msg.edit({
                         content: null,
                         embeds: [
                             {
-                                title: `[${blague.id} ➜ ${blague.type.toUpperCase()}] ➜ ${interaction.values[0] === "global" ? "Blague générale" : interaction.values[0] === "dev" ? "Blague de développeur" : interaction.values[0] === "dark" ? "Humour noir" : interaction.values[0] === "blondes" ? "Blague de blonde" : interaction.values[0] === "limit" ? "Blague 18+" : interaction.values[0] === "beauf" ? "Blague de beauf" : "Blague de type incconu"}`,
+                                title: `[${blague.id} ➜ ${blague.type.toUpperCase()}] ➜ ${CategoriesRefsFull[blague.type as Category]}`,
                                 description: `${blague.joke}\n\n> ||${blague.answer}||`,
                                 color: client.config.color.integer,
                                 footer: {
@@ -109,18 +87,18 @@ class Joke extends Command {
                     })
                         .then(async (m: Message) => {
                             const filter2 = (x: MessageComponentInteraction) => x?.user.id === message.author.id && x?.customId === "jokeBTN";
-                            const collector2 = await m.createMessageComponentCollector({ filter2, time: 10 * 60000 })
+                            const collector2 = m.createMessageComponentCollector({ filter: filter2, time: 10 * 60000 })
 
                             collector2.on("collect", async (inter: ButtonInteraction) => {
                                 await inter.deferUpdate()
-                                await getJoke(client, interaction.values[0])
+                                await getJoke(client, interaction.values[0] as Category)
                                     // @ts-ignore
-                                    .then(async (blague: object) => {
+                                    .then(async (blague: JokeResponse) => {
                                         msg.edit({
                                             content: null,
                                             embeds: [
                                                 {
-                                                    title: `[${blague.id} ➜ ${blague.type.toUpperCase()}] ➜ ${interaction.values[0] === "global" ? "Blague générale" : interaction.values[0] === "dev" ? "Blague de développeur" : interaction.values[0] === "dark" ? "Humour noir" : interaction.values[0] === "blondes" ? "Blague de blonde" : interaction.values[0] === "limit" ? "Blague 18+" : interaction.values[0] === "beauf" ? "Blague de beauf" : "Blague de type incconu"}`,
+                                                    title: `[${blague.id} ➜ ${blague.type.toUpperCase()}] ➜ ${CategoriesRefsFull[blague.type as Category]}`,
                                                     description: `${blague.joke}\n\n> ||${blague.answer}||`,
                                                     color: client.config.color.integer,
                                                     footer: {

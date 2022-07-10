@@ -10,5 +10,6 @@ export default {
         "650664078649458699"
     ],
     jokeToken: "BLAGUES_API_TOKEN",
-    botlogs: "849687171702325348"
+    botlogs: "849687171702325348",
+    mongooseConnectionString: 'Mongoose-Connection'
 };
